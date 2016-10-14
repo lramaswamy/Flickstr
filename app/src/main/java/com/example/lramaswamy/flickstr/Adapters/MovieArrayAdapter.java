@@ -56,9 +56,9 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
         int orientation = getContext().getResources().getConfiguration().orientation;
         //Populate the view holder for the movie model with the correct data
         if(orientation == Configuration.ORIENTATION_PORTRAIT)
-            Picasso.with(getContext()).load(movie.getPosterPath()).into(mvViewHolder.movieImage);
+            Picasso.with(getContext()).load(movie.getPosterPath()).placeholder(R.mipmap.placeholder).into(mvViewHolder.movieImage);
         else
-            Picasso.with(getContext()).load(movie.getBackdropPath()).into(mvViewHolder.movieImage);
+            Picasso.with(getContext()).load(movie.getBackdropPath()).placeholder(R.mipmap.placeholder).into(mvViewHolder.movieImage);
         mvViewHolder.tvTitle.setText(movie.getOriginalTitle());
         mvViewHolder.tvOverview.setText(movie.getOverview());
 
