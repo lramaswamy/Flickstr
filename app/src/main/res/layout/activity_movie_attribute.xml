@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_movie_attribute"
     android:layout_width="match_parent"
@@ -21,23 +20,42 @@
         android:layout_alignParentStart="true"
         android:id="@+id/movieTitle" />
 
-    <ImageView
+    <RatingBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:src="@mipmap/ic_launcher"
-        android:scaleType="centerInside"
         android:layout_below="@+id/movieTitle"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/movieRating" />
+        android:id="@+id/ratingBar"
+        style="@style/Widget.AppCompat.RatingBar.Indicator" />
 
     <TextView
         tools:text="A big screen remake of John Sturges' classic western The Magnificent Seven, itself a remake of Akira Kurosawa's Seven Samurai. Seven gun men in the old west gradually come together to help a poor village against savage thieves."
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/movieSynopsis"
-        android:layout_below="@+id/movieRating"
+        android:layout_below="@+id/ratingBar"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        tools:src="@mipmap/ic_launcher"
+        android:id="@+id/popularity"
+        android:scaleType="centerInside"
+        android:layout_below="@+id/movieSynopsis"
+        android:layout_alignRight="@+id/ratingBar"
+        android:layout_alignEnd="@+id/ratingBar"
+        android:layout_marginRight="10dp"
+        android:layout_marginEnd="10dp" />
+
+    <TextView
+        android:text="Popularity:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView"
+        android:layout_alignBottom="@+id/popularity"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="36dp" />
 
 </RelativeLayout>

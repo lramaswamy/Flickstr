@@ -44,7 +44,7 @@ public class MovieActivity extends AppCompatActivity {
         movies = new ArrayList<>();
         movieArrayAdapter = new MovieArrayAdapter(this, movies);
         lvItems.setAdapter(movieArrayAdapter);
-        fetchTimelineAsync(0);
+        fetchTimelineAsync();
         setupListViewListener();
         // Refresh data when the layout is swiped
         swipeContainer = (SwipeRefreshLayout) findViewById(R.id.activity_movie_swipelayout);
@@ -53,7 +53,7 @@ public class MovieActivity extends AppCompatActivity {
             @Override
             public void onRefresh() {
                 Log.d("DEBUG", movies.toString());
-                fetchTimelineAsync(0);
+                fetchTimelineAsync();
 
             }
         });
@@ -70,7 +70,8 @@ public class MovieActivity extends AppCompatActivity {
         });
     }
 
-    public void fetchTimelineAsync(int page) {
+
+    public void fetchTimelineAsync() {
         AsyncHttpClient client = new AsyncHttpClient();
         client.get(url, new JsonHttpResponseHandler() {
             @Override

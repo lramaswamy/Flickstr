@@ -13,7 +13,16 @@ import java.util.ArrayList;
  * Created by lramaswamy on 10/10/16.
  */
 
-public class Movie implements Parcelable{
+public class Movie implements Parcelable {
+    String posterPath;
+    String backdropPath;
+    String originalTitle;
+    String overview;
+    float ratings;
+    int popularity;
+    int movieID;
+
+    static String api_key="a07e22bc18f5cb106bfe4cc1f83ad8ed";
 
     public String getPosterPath() {
         return String.format("https://image.tmdb.org/t/p/w780/%s", posterPath);
@@ -31,12 +40,18 @@ public class Movie implements Parcelable{
         return overview;
     }
 
-    String posterPath;
-    String backdropPath;
-    String originalTitle;
-    String overview;
-    int ratings;
-    int popularity;
+    public float getRatings() {
+        return ratings;
+    }
+
+    public int getPopularity() {
+        return popularity;
+    }
+
+    public int getMovieID() {
+        return movieID;
+    }
+
 
     public Movie(JSONObject jsonObject) throws JSONException {
 
@@ -44,6 +59,9 @@ public class Movie implements Parcelable{
         this.backdropPath = jsonObject.getString("backdrop_path");
         this.originalTitle = jsonObject.getString("original_title");
         this.overview = jsonObject.getString("overview");
+        this.popularity = jsonObject.getInt("popularity");
+        this.ratings = jsonObject.getLong("vote_average");
+        this.movieID = jsonObject.getInt("id");
     }
 
     private Movie(Parcel in) {
@@ -51,14 +69,14 @@ public class Movie implements Parcelable{
         this.backdropPath = in.readString();
         this.originalTitle = in.readString();
         this.overview = in.readString();
-        this.ratings = in.readInt();
+        this.ratings = in.readFloat();
         this.popularity = in.readInt();
     }
 
     public static ArrayList<Movie> fromJSONArray(JSONArray array) {
         ArrayList<Movie> results = new ArrayList<>();
 
-        for(int i=0; i< array.length(); i++) {
+        for (int i = 0; i < array.length(); i++) {
             try {
                 results.add(new Movie(array.getJSONObject(i)));
             } catch (JSONException e) {
@@ -79,7 +97,7 @@ public class Movie implements Parcelable{
         dest.writeString(backdropPath);
         dest.writeString(originalTitle);
         dest.writeString(overview);
-        dest.writeInt(ratings);
+        dest.writeFloat(ratings);
         dest.writeInt(popularity);
     }
 
@@ -94,4 +112,27 @@ public class Movie implements Parcelable{
             return new Movie[size];
         }
     };
+
+    /*public void getRatingsFromAPI() {
+        String url = "https://api.themoviedb.org/3/movie/" + movieID + "/account_states?" + api_key;
+
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.get(url, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                JSONArray results = null;
+                try {
+                    results = response.getJSONArray("results");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                super.onFailure(statusCode, headers, responseString, throwable);
+            }
+        });
+    }*/
 }
