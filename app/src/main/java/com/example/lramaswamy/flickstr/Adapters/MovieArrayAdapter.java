@@ -16,6 +16,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
+
 /**
  * Created by lramaswamy on 10/11/16.
  */
@@ -56,9 +58,9 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
         int orientation = getContext().getResources().getConfiguration().orientation;
         //Populate the view holder for the movie model with the correct data
         if(orientation == Configuration.ORIENTATION_PORTRAIT)
-            Picasso.with(getContext()).load(movie.getPosterPath()).placeholder(R.mipmap.placeholder).into(mvViewHolder.movieImage);
+            Picasso.with(getContext()).load(movie.getPosterPath()).transform(new RoundedCornersTransformation(20, 10)).placeholder(R.mipmap.placeholder).into(mvViewHolder.movieImage);
         else
-            Picasso.with(getContext()).load(movie.getBackdropPath()).placeholder(R.mipmap.placeholder).into(mvViewHolder.movieImage);
+            Picasso.with(getContext()).load(movie.getBackdropPath()).transform(new RoundedCornersTransformation(20, 10)).placeholder(R.mipmap.placeholder).into(mvViewHolder.movieImage);
         mvViewHolder.tvTitle.setText(movie.getOriginalTitle());
         mvViewHolder.tvOverview.setText(movie.getOverview());
 
